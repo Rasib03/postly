@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "629326236281",
+    "project_id": "postly-a02a6",
+    "storage_bucket": "postly-a02a6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:629326236281:android:70288c63b62bbe04e822a8",
+        "android_client_info": {
+          "package_name": "com.example.postly"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYifccqCXTBLHWCCVU8sX8XjIKzJZT0gY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
