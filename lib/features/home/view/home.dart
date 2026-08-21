@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:postly/app/app_colors.dart';
+import 'package:postly/app/route_names.dart';
 import 'package:postly/features/home/view/widgets/draft_hero_card.dart';
-import 'package:postly/features/home/view/widgets/home_bottom_nav.dart';
 import 'package:postly/features/home/view/widgets/home_header.dart';
 import 'package:postly/features/home/view/widgets/recent_activity_section.dart';
 import 'package:postly/features/home/view/widgets/stats_row.dart';
@@ -16,17 +16,17 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int _navIndex = 0;
   final HomeViewmodel _vm = Get.find<HomeViewmodel>();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgDeep,
-      bottomNavigationBar: HomeBottomNav(
-        currentIndex: _navIndex,
-        onTap: (i) => setState(() => _navIndex = i),
-      ),
       floatingActionButton: _CustomPostFab(),
       body: Container(
         decoration: const BoxDecoration(
@@ -57,9 +57,9 @@ class _HomeState extends State<Home> {
                   delegate: SliverChildListDelegate([
                     DraftHeroCard(vm: _vm),
                     const SizedBox(height: 20),
-                    const StatsRow(),
+                    StatsRow(),
                     const SizedBox(height: 24),
-                    const RecentActivitySection(),
+                    RecentActivitySection(vm: _vm),
                   ]),
                 ),
               ),
@@ -75,7 +75,7 @@ class _CustomPostFab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton.extended(
-      onPressed: () {},
+      onPressed: () => Get.toNamed(Routes.customPost),
       backgroundColor: AppColors.accentSecondary,
       foregroundColor: Colors.white,
       elevation: 6,

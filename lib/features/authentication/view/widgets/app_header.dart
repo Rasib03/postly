@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+﻿import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:postly/app/app_colors.dart';
 import 'package:postly/app/app_strings.dart';
@@ -23,7 +23,7 @@ class AppHeader extends StatelessWidget {
             child: const Icon(
               CupertinoIcons.bolt_fill,
               size: 44,
-              color: Colors.white, // overridden by ShaderMask
+              color: Colors.white,
             ),
           ),
         ),

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:postly/app/app_colors.dart';
 import 'package:postly/features/preferences/model/preferences_model.dart';
 
@@ -117,7 +117,7 @@ class _ToneCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            // Emoji badge
+
             Container(
               width: 42,
               height: 42,

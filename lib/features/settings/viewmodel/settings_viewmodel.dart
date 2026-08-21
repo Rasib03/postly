@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:postly/app/route_names.dart';
 import 'package:postly/core/repository/user_preferences_repository.dart';
@@ -27,7 +27,6 @@ class SettingsViewmodel extends GetxController {
   late final RxString profilePictureUrl;
   final RxBool isConnected = false.obs;
   final RxBool isLoading = false.obs;
-  final RxBool autoIncludeLinks = true.obs;
   final RxBool dailyReminders = false.obs;
   final RxList<String> selectedTopics = <String>[].obs;
   final Rx<WritingTone> selectedTone = WritingTone.professional.obs;
@@ -73,7 +72,6 @@ class SettingsViewmodel extends GetxController {
     isLoading.value = true;
     try {
       final prefs = await _prefsRepo.fetch();
-      autoIncludeLinks.value = prefs.autoIncludeLinks;
       dailyReminders.value = prefs.dailyReminders;
       selectedTopics.assignAll(prefs.selectedTopics);
       selectedTone.value = WritingTone.values.firstWhere(
@@ -84,11 +82,6 @@ class SettingsViewmodel extends GetxController {
     } finally {
       isLoading.value = false;
     }
-  }
-
-  Future<void> toggleAutoIncludeLinks(bool value) async {
-    autoIncludeLinks.value = value;
-    await _prefsRepo.patch({'autoIncludeLinks': value});
   }
 
   Future<void> toggleDailyReminders(bool value) async {
@@ -106,7 +99,13 @@ class SettingsViewmodel extends GetxController {
     Get.offAllNamed(Routes.signIn);
   }
 
-  void navigateToPreferences() => Get.toNamed(Routes.preferences);
+  void navigateToPreferences() async {
+    await Get.toNamed(Routes.preferences);
+    await _loadPreferences();
+  }
 
-  void openTonePicker(BuildContext context) => Get.toNamed(Routes.preferences);
+  Future<void> openTonePicker(BuildContext context) async {
+    await Get.toNamed(Routes.preferences);
+    await _loadPreferences();
+  }
 }

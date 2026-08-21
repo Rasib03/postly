@@ -1,30 +1,36 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:postly/app/app_colors.dart';
+import 'package:postly/features/home/viewmodel/home_viewmodel.dart';
 
 class StatsRow extends StatelessWidget {
-  const StatsRow({super.key});
-
+  StatsRow({super.key});
+  final vm = Get.find<HomeViewmodel>();
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
-          child: _StatCard(
-            emoji: '📝',
-            value: '12',
-            label: 'Drafts Ready',
-            accentColor: AppColors.accentPrimary,
-            bgColor: AppColors.accentGlow,
+          child: Obx(
+            () => _StatCard(
+              emoji: '📝',
+              value: vm.readyDraftCount.value.toString(),
+              label: 'Drafts Ready',
+              accentColor: AppColors.accentPrimary,
+              bgColor: AppColors.accentGlow,
+            ),
           ),
         ),
         const SizedBox(width: 12),
         Expanded(
-          child: _StatCard(
-            emoji: '🔥',
-            value: '5',
-            label: 'Day Streak',
-            accentColor: const Color(0xFFEF6C00),
-            bgColor: const Color(0x1AEF6C00),
+          child: Obx(
+            () => _StatCard(
+              emoji: '🔥',
+              value: vm.dayStreak.value.toString(),
+              label: 'Day Streak',
+              accentColor: const Color(0xFFEF6C00),
+              bgColor: const Color(0x1AEF6C00),
+            ),
           ),
         ),
       ],
@@ -65,7 +71,7 @@ class _StatCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          // Emoji badge
+
           Container(
             width: 42,
             height: 42,

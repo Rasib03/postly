@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:postly/app/app_colors.dart';
 import 'package:postly/features/preferences/model/preferences_model.dart';

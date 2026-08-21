@@ -1,10 +1,9 @@
-// ignore: file_names
-import 'dart:async';
-
+﻿import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:http/http.dart' as http;
 import 'package:linkedin_login/linkedin_login.dart';
 import 'package:postly/features/authentication/model/linkedin_user.dart';
 import 'package:postly/features/authentication/repository/auth_repository.dart';
@@ -21,8 +20,13 @@ class LinkedinAuthRepository implements AuthRepository {
         redirectUrl: dotenv.get("REDIRECT_URL"),
         clientId: dotenv.get("CLIENT_ID"),
         clientSecret: dotenv.get("CLIENT_SECRET"),
-        destroySession: false,
-        scope: const [OpenIdScope(), EmailScope(), ProfileScope()],
+        destroySession: true,
+        scope: const [
+          OpenIdScope(),
+          EmailScope(),
+          ProfileScope(),
+          _MemberSocialScope(),
+        ],
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -90,7 +94,27 @@ class LinkedinAuthRepository implements AuthRepository {
   @override
   Future<bool> isLinkedInConnected() async {
     final token = _storage.read<String>(_keyToken);
-    return token != null && token.isNotEmpty;
+    if (token == null || token.isEmpty) return false;
+
+    try {
+      final response = await http
+          .get(
+            Uri.parse('https:
+            headers: {'Authorization': 'Bearer $token'},
+          )
+          .timeout(const Duration(seconds: 8));
+
+      if (response.statusCode == 401 || response.statusCode == 403) {
+
+        await disconnectLinkedIn();
+        return false;
+      }
+
+      return response.statusCode == 200;
+    } catch (_) {
+
+      return false;
+    }
   }
 
   @override
@@ -106,4 +130,8 @@ class LinkedinAuthRepository implements AuthRepository {
       sub: _storage.read<String>('linkedin_sub'),
     );
   }
+}
+
+class _MemberSocialScope extends Scope {
+  const _MemberSocialScope() : super('w_member_social');
 }

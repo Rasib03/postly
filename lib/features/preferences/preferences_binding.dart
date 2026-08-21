@@ -1,4 +1,4 @@
-import 'package:get/get.dart';
+﻿import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:postly/core/repository/user_preferences_repository.dart';
 import 'package:postly/features/preferences/viewmodel/preferences_viewmodel.dart';
@@ -16,7 +16,7 @@ class PreferencesBinding extends Bindings {
     final args = Get.arguments;
     if (args is List && args.isNotEmpty) {
       try {
-        // ignore: avoid_dynamic_calls
+
         final sub = (args[0] as dynamic).sub as String?;
         if (sub != null && sub.isNotEmpty) return sub;
       } catch (_) {}

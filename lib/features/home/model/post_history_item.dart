@@ -1,4 +1,4 @@
-class PostHistoryItem {
+﻿class PostHistoryItem {
   const PostHistoryItem({
     required this.dateLabel,
     required this.teaser,

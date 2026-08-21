@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:postly/app/app_colors.dart';
 
 class _AiAction {
@@ -64,7 +64,7 @@ class AiAssistBar extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Section label
+
         const Padding(
           padding: EdgeInsets.only(left: 2, bottom: 10),
           child: Row(

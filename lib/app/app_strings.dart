@@ -1,4 +1,4 @@
-abstract class AppStrings {
+﻿abstract class AppStrings {
   static const String appName = "Postly";
   static const String appTagline = "Build your LinkedIn brand on autopilot";
   static const String signInWithLinkedIn = "Continue with LinkedIn";
@@ -16,7 +16,6 @@ abstract class AppStrings {
   static const String featureThreeSubtitle =
       "Customise tone, topics & schedule";
 
-  // ── Terms of Service ──────────────────────────────────────────────────────
   static const String termsContent = '''
 Last updated: July 2026
 
@@ -51,7 +50,6 @@ We may update these Terms at any time. Continued use of the App after changes co
 For any questions regarding these Terms, contact us at support@posttechai.app
 ''';
 
-  // ── Privacy Policy ────────────────────────────────────────────────────────
   static const String privacyContent = '''
 Last updated: July 2026
 

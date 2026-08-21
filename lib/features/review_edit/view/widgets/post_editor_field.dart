@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:postly/app/app_colors.dart';
 
 class PostEditorField extends StatelessWidget {
@@ -74,7 +74,7 @@ class PostEditorField extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
             child: Row(
               children: [
-                // Word count
+
                 Icon(
                   Icons.text_fields_rounded,
                   size: 13,

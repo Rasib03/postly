@@ -1,23 +1,20 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+﻿import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserPreferences {
   const UserPreferences({
     this.selectedTopics = const [],
     this.writingTone = 'professional',
-    this.autoIncludeLinks = true,
     this.dailyReminders = false,
   });
 
   final List<String> selectedTopics;
   final String writingTone;
-  final bool autoIncludeLinks;
   final bool dailyReminders;
 
   factory UserPreferences.fromMap(Map<String, dynamic> map) {
     return UserPreferences(
       selectedTopics: List<String>.from(map['selectedTopics'] ?? []),
       writingTone: (map['writingTone'] as String?) ?? 'professional',
-      autoIncludeLinks: (map['autoIncludeLinks'] as bool?) ?? true,
       dailyReminders: (map['dailyReminders'] as bool?) ?? false,
     );
   }
@@ -25,7 +22,6 @@ class UserPreferences {
   Map<String, dynamic> toMap() => {
     'selectedTopics': selectedTopics,
     'writingTone': writingTone,
-    'autoIncludeLinks': autoIncludeLinks,
     'dailyReminders': dailyReminders,
     'updatedAt': FieldValue.serverTimestamp(),
   };
@@ -33,13 +29,11 @@ class UserPreferences {
   UserPreferences copyWith({
     List<String>? selectedTopics,
     String? writingTone,
-    bool? autoIncludeLinks,
     bool? dailyReminders,
   }) {
     return UserPreferences(
       selectedTopics: selectedTopics ?? this.selectedTopics,
       writingTone: writingTone ?? this.writingTone,
-      autoIncludeLinks: autoIncludeLinks ?? this.autoIncludeLinks,
       dailyReminders: dailyReminders ?? this.dailyReminders,
     );
   }

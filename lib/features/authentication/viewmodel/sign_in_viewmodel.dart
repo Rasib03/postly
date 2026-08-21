@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:postly/app/route_names.dart';
 import 'package:postly/core/repository/user_preferences_repository.dart';
+import 'package:postly/core/services/notification_service.dart';
 import 'package:postly/features/authentication/model/linkedin_user.dart';
 import 'package:postly/features/authentication/repository/auth_repository.dart';
 
@@ -35,6 +36,13 @@ class SignInViewmodel extends GetxController {
     final sub = user.sub?.isNotEmpty == true ? user.sub! : 'anonymous';
     final repo = UserPreferencesRepository(userSub: sub);
     final hasOnboarded = await repo.hasCompletedOnboarding();
+
+    if (user.accessToken.isNotEmpty) {
+      await NotificationService.instance.mirrorCredentials(
+        accessToken: user.accessToken,
+        personUrn: user.sub ?? '',
+      );
+    }
 
     if (hasOnboarded) {
       Get.offAllNamed(Routes.home, arguments: [user, _repository]);

@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+﻿import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:postly/app/app_colors.dart';
 import 'package:postly/app/app_strings.dart';
@@ -98,7 +98,7 @@ class _LegalSheet extends StatelessWidget {
           ),
           child: Column(
             children: [
-              // Drag handle
+
               Padding(
                 padding: const EdgeInsets.only(top: 12, bottom: 8),
                 child: Container(

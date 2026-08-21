@@ -1,4 +1,4 @@
-class DraftPost {
+﻿class DraftPost {
   const DraftPost({
     required this.sourceTag,
     required this.articleTitle,
@@ -16,7 +16,7 @@ abstract class DraftPostMock {
   static const DraftPost sample = DraftPost(
     sourceTag: 'TechCrunch',
     articleTitle: 'Meta releases Llama 4',
-    articleUrl: 'https://techcrunch.com/meta-llama-4',
+    articleUrl: 'https:
     body:
         "Meta just dropped Llama 4 — and it's rewriting the rules of "
         "open-source AI.\n\n"

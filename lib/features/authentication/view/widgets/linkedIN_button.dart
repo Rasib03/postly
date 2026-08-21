@@ -1,4 +1,4 @@
-// ignore: file_names
+﻿
 import 'package:flutter/material.dart';
 import 'package:postly/app/app_colors.dart';
 import 'package:postly/app/app_strings.dart';

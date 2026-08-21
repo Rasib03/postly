@@ -1,36 +1,36 @@
-import 'package:flutter/cupertino.dart';
+﻿import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:postly/app/app_colors.dart';
-import 'package:postly/features/review_edit/model/draft_post.dart';
 import 'package:postly/features/review_edit/view/widgets/ai_assist_bar.dart';
 import 'package:postly/features/review_edit/view/widgets/post_action_bar.dart';
 import 'package:postly/features/review_edit/view/widgets/post_editor_field.dart';
-import 'package:postly/features/review_edit/view/widgets/source_banner.dart';
+import 'package:postly/features/review_edit/viewmodel/review_edit_viewmodel.dart';
 
 class ReviewEditScreen extends StatefulWidget {
-  const ReviewEditScreen({super.key, this.draft});
-
-  final DraftPost? draft;
+  const ReviewEditScreen({super.key});
 
   @override
   State<ReviewEditScreen> createState() => _ReviewEditScreenState();
 }
 
 class _ReviewEditScreenState extends State<ReviewEditScreen> {
+  late final ReviewEditViewmodel _vm;
   late final TextEditingController _bodyCtrl;
   late final FocusNode _focusNode;
-
-  bool _isPublishing = false;
-
-  DraftPost get _draft => widget.draft ?? DraftPostMock.sample;
 
   @override
   void initState() {
     super.initState();
-    _bodyCtrl = TextEditingController(text: _draft.body);
+    _vm = Get.find<ReviewEditViewmodel>();
+    _bodyCtrl = TextEditingController(text: _vm.postBody.value);
     _focusNode = FocusNode();
+
     _focusNode.addListener(() => setState(() {}));
-    _bodyCtrl.addListener(() => setState(() {}));
+    _bodyCtrl.addListener(() {
+      _vm.postBody.value = _bodyCtrl.text;
+      setState(() {});
+    });
   }
 
   @override
@@ -56,29 +56,6 @@ class _ReviewEditScreenState extends State<ReviewEditScreen> {
     );
   }
 
-  void _onPublish() {
-    setState(() => _isPublishing = true);
-    Future.delayed(const Duration(seconds: 2), () {
-      if (mounted) setState(() => _isPublishing = false);
-    });
-  }
-
-  void _onSaveDraft() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: const Text(
-          '📋 Draft saved',
-          style: TextStyle(decoration: TextDecoration.none),
-        ),
-        behavior: SnackBarBehavior.floating,
-        margin: const EdgeInsets.fromLTRB(20, 0, 20, 16),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        backgroundColor: const Color(0xFF1B5E20),
-        duration: const Duration(seconds: 2),
-      ),
-    );
-  }
-
   void _onRegenerate() {
     showModalBottomSheet<void>(
       context: context,
@@ -89,8 +66,6 @@ class _ReviewEditScreenState extends State<ReviewEditScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final charCount = _bodyCtrl.text.length;
-
     return Scaffold(
       backgroundColor: AppColors.bgDeep,
       resizeToAvoidBottomInset: true,
@@ -112,17 +87,10 @@ class _ReviewEditScreenState extends State<ReviewEditScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SourceBanner(
-                      sourceTag: _draft.sourceTag,
-                      articleTitle: _draft.articleTitle,
-                      articleUrl: _draft.articleUrl,
-                      onOpenLink: () {},
-                    ),
-                    const SizedBox(height: 16),
                     PostEditorField(
                       controller: _bodyCtrl,
                       focusNode: _focusNode,
-                      charCount: charCount,
+                      charCount: _bodyCtrl.text.length,
                     ),
                     const SizedBox(height: 20),
                     AiAssistBar(onAction: _onAiAction),
@@ -131,10 +99,12 @@ class _ReviewEditScreenState extends State<ReviewEditScreen> {
                 ),
               ),
             ),
-            PostActionBar(
-              isPublishing: _isPublishing,
-              onPublish: _onPublish,
-              onSaveDraft: _onSaveDraft,
+            Obx(
+              () => PostActionBar(
+                isPublishing: _vm.isPublishing.value,
+                onPublish: _vm.publishToLinkedIn,
+                onSaveDraft: _vm.saveDraft,
+              ),
             ),
           ],
         ),
@@ -179,7 +149,6 @@ class _ReviewEditAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       centerTitle: true,
       actions: [
-        // Regenerate AI button
         Padding(
           padding: const EdgeInsets.only(right: 8),
           child: IconButton(
@@ -221,7 +190,6 @@ class _RegenerateSheet extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Drag handle
           Container(
             width: 40,
             height: 4,
@@ -256,8 +224,7 @@ class _RegenerateSheet extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           const Text(
-            'This will replace your current draft with a new\n'
-            'AI-generated version based on the same article.',
+            'This will replace your current draft with a new\nAI-generated version based on the same article.',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 13,
@@ -271,9 +238,7 @@ class _RegenerateSheet extends StatelessWidget {
             width: double.infinity,
             height: 50,
             child: ElevatedButton.icon(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+              onPressed: () => Navigator.of(context).pop(),
               icon: const Icon(Icons.refresh_rounded, size: 18),
               label: const Text(
                 'Yes, Regenerate',

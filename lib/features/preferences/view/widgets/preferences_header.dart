@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:postly/app/app_colors.dart';
 
 class PreferencesHeader extends StatelessWidget {
@@ -39,7 +39,6 @@ class PreferencesHeader extends StatelessWidget {
 
         const SizedBox(height: 28),
 
-        // Title
         const Text(
           'Tailor Your Feed 🎯',
           style: TextStyle(

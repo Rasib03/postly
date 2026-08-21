@@ -1,4 +1,4 @@
-import 'package:postly/features/authentication/model/linkedin_user.dart';
+﻿import 'package:postly/features/authentication/model/linkedin_user.dart';
 
 abstract class AuthRepository {
   Future<LinkedInUserProfile> signInWithLinkedIn();

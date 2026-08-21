@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:postly/app/app_colors.dart';
 
 class SettingsFooter extends StatelessWidget {

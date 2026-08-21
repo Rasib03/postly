@@ -1,13 +1,14 @@
-import 'package:get/get.dart';
+﻿import 'package:get/get.dart';
 import 'package:postly/app/route_names.dart';
 import 'package:postly/core/middlewares/auth_middleware.dart';
 import 'package:postly/features/authentication/auth_binding.dart';
 import 'package:postly/features/authentication/view/sign_in.dart';
+import 'package:postly/features/custom_post/custom_post_bindings.dart';
+import 'package:postly/features/custom_post/view/custom_post.dart';
 import 'package:postly/features/home/home_binding.dart';
 import 'package:postly/features/home/view/home.dart';
 import 'package:postly/features/preferences/preferences_binding.dart';
 import 'package:postly/features/preferences/view/preferences_screen.dart';
-import 'package:postly/features/review_edit/model/draft_post.dart';
 import 'package:postly/features/review_edit/review_edit_binding.dart';
 import 'package:postly/features/review_edit/view/review_edit_screen.dart';
 import 'package:postly/features/settings/settings_binding.dart';
@@ -46,7 +47,7 @@ class AppPages {
     ),
     GetPage(
       name: Routes.reviewEdit,
-      page: () => ReviewEditScreen(draft: Get.arguments as DraftPost?),
+      page: () => const ReviewEditScreen(),
       binding: ReviewEditBinding(),
       transition: Transition.cupertino,
     ),
@@ -54,6 +55,12 @@ class AppPages {
       name: Routes.home,
       page: () => const Home(),
       binding: HomeBinding(),
+    ),
+
+    GetPage(
+      name: Routes.customPost,
+      page: () => CustomPost(),
+      binding: CustomPostBinding(),
     ),
   ];
 }

@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+﻿import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:postly/app/app_colors.dart';
@@ -22,7 +22,7 @@ class HomeHeader extends StatelessWidget {
             child: CircleAvatar(
               radius: 22,
               backgroundColor: AppColors.accentGlow,
-              // Show network image if available, otherwise fall back to initials
+
               backgroundImage: vm.hasPicture
                   ? NetworkImage(vm.profilePicture)
                   : null,
@@ -88,22 +88,21 @@ class _LinkedInChip extends StatelessWidget {
     return Obx(() {
       final isConnected = vm.isConnected;
 
-      // Color scheme definitions based on connection state
       final backgroundColor = isConnected
-          ? const Color(0xFFE8F5E9) // Light green
-          : const Color(0xFFFFEBEE); // Light red
+          ? const Color(0xFFE8F5E9)
+          : const Color(0xFFFFEBEE);
 
       final borderColor = isConnected
-          ? const Color(0xFFA5D6A7) // Soft green
-          : const Color(0xFFEF9A9A); // Soft red
+          ? const Color(0xFFA5D6A7)
+          : const Color(0xFFEF9A9A);
 
       final dotColor = isConnected
-          ? const Color(0xFF43A047) // Medium green
-          : const Color(0xFFE53935); // Medium red
+          ? const Color(0xFF43A047)
+          : const Color(0xFFE53935);
 
       final textColor = isConnected
-          ? const Color(0xFF2E7D32) // Dark green
-          : const Color(0xFFC62828); // Dark red
+          ? const Color(0xFF2E7D32)
+          : const Color(0xFFC62828);
 
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),

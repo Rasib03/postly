@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:postly/app/app_colors.dart';
 import 'package:postly/features/authentication/view/widgets/glow_orb.dart';
 
@@ -11,7 +11,7 @@ class AmbientBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // Deep gradient base
+
         Container(
           width: size.width,
           height: size.height,
@@ -24,7 +24,6 @@ class AmbientBackground extends StatelessWidget {
           ),
         ),
 
-        // Top-left cyan orb
         Positioned(
           top: -60,
           left: -40,
@@ -34,7 +33,6 @@ class AmbientBackground extends StatelessWidget {
           ),
         ),
 
-        // Bottom-right blue orb
         Positioned(
           bottom: size.height * 0.1,
           right: -60,

@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+﻿import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:postly/app/app_colors.dart';
@@ -45,12 +45,14 @@ class SettingsScreen extends StatelessWidget {
               icon: Icons.tune_rounded,
               iconColor: AppColors.accentPrimary,
               children: [
-                SettingsNavTile(
-                  icon: Icons.interests_rounded,
-                  iconBg: AppColors.accentPrimary,
-                  title: 'Topics & Interests',
-                  subtitle: vm.topicsSummary,
-                  onTap: vm.navigateToPreferences,
+                Obx(
+                  () => SettingsNavTile(
+                    icon: Icons.interests_rounded,
+                    iconBg: AppColors.accentPrimary,
+                    title: 'Topics & Interests',
+                    subtitle: vm.topicsSummary,
+                    onTap: vm.navigateToPreferences,
+                  ),
                 ),
                 Obx(
                   () => SettingsNavTile(
@@ -59,16 +61,6 @@ class SettingsScreen extends StatelessWidget {
                     title: 'Default Post Tone',
                     trailing: _ToneTrailing(tone: vm.selectedTone.value.label),
                     onTap: () => vm.openTonePicker(context),
-                  ),
-                ),
-                Obx(
-                  () => SettingsToggleTile(
-                    icon: Icons.link_rounded,
-                    iconBg: const Color(0xFF00897B),
-                    title: 'Auto-include Source Links',
-                    subtitle: 'Append article URL to generated posts',
-                    value: vm.autoIncludeLinks.value,
-                    onChanged: vm.toggleAutoIncludeLinks,
                   ),
                 ),
               ],

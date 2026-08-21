@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:postly/app/app_colors.dart';
 
 class SourceBanner extends StatelessWidget {
@@ -56,7 +56,7 @@ class SourceBanner extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // "Source: TechCrunch" tag
+
                       Row(
                         children: [
                           Container(

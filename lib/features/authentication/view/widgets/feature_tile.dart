@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+﻿import 'package:flutter/cupertino.dart';
 import 'package:postly/app/app_colors.dart';
 
 class FeatureTile extends StatelessWidget {
@@ -12,7 +12,7 @@ class FeatureTile extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
         children: [
-          // Icon badge
+
           Container(
             width: 40,
             height: 40,

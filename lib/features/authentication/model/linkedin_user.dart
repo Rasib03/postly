@@ -1,4 +1,4 @@
-class LinkedInUserProfile {
+﻿class LinkedInUserProfile {
   const LinkedInUserProfile({
     required this.accessToken,
     required this.firstName,

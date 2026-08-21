@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:postly/app/app_colors.dart';
 
 class PostActionBar extends StatelessWidget {
@@ -15,6 +15,8 @@ class PostActionBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bottomInset = MediaQuery.paddingOf(context).bottom;
+
     return Container(
       decoration: BoxDecoration(
         color: AppColors.bgCard,
@@ -27,7 +29,7 @@ class PostActionBar extends StatelessWidget {
           ),
         ],
       ),
-      padding: const EdgeInsets.fromLTRB(20, 14, 20, 24),
+      padding: EdgeInsets.fromLTRB(20, 14, 20, bottomInset + 14),
       child: Row(
         children: [
           Expanded(

@@ -1,4 +1,4 @@
-class TopicItem {
+﻿class TopicItem {
   const TopicItem({required this.emoji, required this.label});
 
   final String emoji;

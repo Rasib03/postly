@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:postly/app/app_colors.dart';
 import 'package:postly/app/app_strings.dart';
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: AppColors.bgDeep,
-        // Wipe out all default text decorations — no yellow underlines
+
         textTheme: Typography.material2021().black.apply(
           bodyColor: AppColors.textPrimary,
           displayColor: AppColors.textPrimary,

@@ -1,4 +1,4 @@
-import 'package:get/get.dart';
+﻿import 'package:get/get.dart';
 import 'package:postly/app/route_names.dart';
 import 'package:postly/core/repository/user_preferences_repository.dart';
 import 'package:postly/features/preferences/model/preferences_model.dart';
@@ -48,11 +48,10 @@ class PreferencesViewmodel extends GetxController {
         UserPreferences(
           selectedTopics: selectedTopics.toList(),
           writingTone: selectedTone.value.name,
-          autoIncludeLinks: true,
           dailyReminders: false,
         ),
       );
-      Get.offAllNamed(Routes.home, arguments: Get.arguments);
+      _navigateAfterSave();
     } catch (_) {
       Get.snackbar(
         'Save failed',
@@ -64,7 +63,21 @@ class PreferencesViewmodel extends GetxController {
     }
   }
 
-  void skip() => Get.offAllNamed(Routes.home, arguments: Get.arguments);
+  void skip() {
+    if (Get.previousRoute == Routes.settings) {
+      Get.back();
+    } else {
+      Get.offAllNamed(Routes.home, arguments: Get.arguments);
+    }
+  }
+
+  void _navigateAfterSave() {
+    if (Get.previousRoute == Routes.settings) {
+      Get.back();
+    } else {
+      Get.offAllNamed(Routes.home, arguments: Get.arguments);
+    }
+  }
 
   WritingTone _toneFromName(String name) {
     return WritingTone.values.firstWhere(
